@@ -114,11 +114,13 @@ func (l *lexer) Statement() ([]Field, error) {
 		dType = Float32
 	case TFloat64:
 		dType = Float64
+	case TChar:
+		dType = Hex
 	}
 
 	// 基础类型
-	name := nameToken.Value().(string)
 	if tToken.Type() == TLineEnd {
+		name := nameToken.Value().(string)
 		switch dataTypeToken.Type() {
 		case TString:
 			// 内嵌子集
@@ -137,19 +139,18 @@ func (l *lexer) Statement() ([]Field, error) {
 			result = append(result, fs...)
 		default:
 			field := Field{
-				Name:        name,
-				DisplayName: name,
-				Display:     true,
-				Type:        dType,
+				Name: name,
+				Type: dType,
+				Size: getFieldTypeSize(dType),
 			}
 			result = append(result, field)
 		}
-		l.Next()
+		_, _ = l.Next()
 		return result, nil
 	}
 
 	switch dataTypeToken.Type() {
-	case TFloat64, TInt64, TInt32, TInt16, TInt8, TUint64, TUint32, TUint16, TUint8:
+	case TFloat64, TInt64, TInt32, TInt16, TInt8, TUint64, TUint32, TUint16, TUint8, TChar:
 		if tToken.Type() == TLeftBracket {
 			fs, err := l.arrayStatement(dataTypeToken, nameToken, nil, false)
 			if err != nil {

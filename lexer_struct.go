@@ -25,7 +25,7 @@ func (l *lexer) structureInBrace() ([]Field, error) {
 			return nil, err
 		}
 		if token.Type() == TRightBrace {
-			l.Next()
+			_, _ = l.Next()
 			break
 		}
 	}

@@ -43,5 +43,6 @@ var (
 		TInteger:       "integer",
 		TFloatingPoint: "floating_point",
 		TString:        "string",
+		TChar:          "char",
 	}
 )

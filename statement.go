@@ -36,13 +36,14 @@ func (l *lexer) arrayStatement(dataType, nameToken Token, structure *CStruct, is
 
 		subName := nameToken.Value().(string)
 
+		// 内嵌结构体
 		if isStruct {
 			fs, err := structure.ToStatement()
 			if err != nil {
 				return nil, err
 			}
-			for i := range fs {
-				fs[i].Name = subName + "_" + fs[i].Name
+			for index := range fs {
+				fs[index].Name = fmt.Sprintf("%s_%s", subName, fs[index].Name)
 			}
 
 			for i := 0; i < n; i++ {
@@ -76,25 +77,35 @@ func (l *lexer) arrayStatement(dataType, nameToken Token, structure *CStruct, is
 			dType = Float32
 		case TFloat64:
 			dType = Float64
+		case TChar:
+			dType = Hex
 		}
 
-		for i := 0; i < n; i++ {
-			name := fmt.Sprintf("%s_%d", subName, i)
+		if dType == Hex {
 			field := Field{
-				Name:        name,
-				DisplayName: name,
-				Display:     true,
-				Type:        dType,
+				Name: subName,
+				Type: Hex,
+				Size: uint(n),
 			}
 			result = append(result, field)
+		} else {
+			for i := 0; i < n; i++ {
+				name := fmt.Sprintf("%s_%d", subName, i)
+				field := Field{
+					Name: name,
+					Type: dType,
+					Size: getFieldTypeSize(dType),
+				}
+				result = append(result, field)
+			}
 		}
 
-		token, err := l.Next()
+		endToken, err := l.Next()
 		if err != nil {
 			return nil, err
 		}
-		if token.Type() != TLineEnd {
-			return nil, errors.New("semicolon not found")
+		if endToken.Type() != TLineEnd {
+			return nil, errors.New("';' not found")
 		}
 		return result, nil
 	default:

@@ -21,6 +21,7 @@ const (
 	// 内部结构体
 	Struct = "struct"
 
+	LEN0 = 0
 	LEN1 = 1
 	LEN2 = 2
 	LEN4 = 4
@@ -47,15 +48,10 @@ func (fs FieldSet) Less(i, j int) bool {
 }
 
 type Field struct {
-	Index       uint       `json:"index" bson:"index"`                             // 字段序号
-	Name        string     `json:"name" bson:"name"`                               // 字段名
-	DisplayName string     `json:"display_name" bson:"display_name"`               // 显示名称
-	Display     bool       `json:"display" bson:"display"`                         // 是否显示
-	Type        FieldType  `json:"type" bson:"type"`                               // 字段类型
-	ByteOrder   string     `json:"byte_order" bson:"byte_order"`                   // 字节序
-	Size        *uint      `json:"size,omitempty" bson:"size,omitempty"`           // 字段的大小
-	ElemSize    *FieldType `json:"elem_size,omitempty" bson:"elem_size,omitempty"` // elem的大小
-	Elem        []Field    `json:"elem,omitempty" bson:"elem,omitempty"`           // elem的内容
+	Index uint      // 字段序号
+	Name  string    // 字段名
+	Type  FieldType // 字段类型
+	Size  uint      // 字段长度
 }
 
 func (c *CStruct) ToStatement() ([]Field, error) {

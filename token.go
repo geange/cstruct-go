@@ -13,6 +13,7 @@ const (
 	TUint32
 	TUint16
 	TUint8
+	TChar
 	TLineEnd
 	TStruct
 	TType
