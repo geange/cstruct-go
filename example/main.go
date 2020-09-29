@@ -1,15 +1,3 @@
-# cstruct-go
-
-解析c语言结构体
-
-获取包
-```bash
-go get github.com/geange/cstruct-go
-```
-
-### example
-
-```go
 package main
 
 import (
@@ -58,5 +46,3 @@ typedef struct
     u8  Status;
 } MSG_RouteData_t;`
 )
-
-```
