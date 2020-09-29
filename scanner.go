@@ -183,8 +183,8 @@ func (s *scanner) ScanLetter() (Token, error) {
 			return &ReservedWordToken{ttype: TTypedef}, nil
 		case "struct":
 			return &ReservedWordToken{ttype: TStruct}, nil
-		case "char":
-			return &ReservedWordToken{ttype: TChar}, nil
+		case "byte":
+			return &ReservedWordToken{ttype: TByte}, nil
 		}
 	}
 	return &LetterToken{ttype: TString, value: word}, nil

@@ -33,3 +33,34 @@ func getFieldTypeSize(t FieldType) uint {
 		return LEN0
 	}
 }
+
+func ToUnderLine(src string) string {
+	result := make([]byte, 0)
+	for i := 0; i < len(src); i++ {
+		w := src[i]
+		if i == 0 && isUpper(w) {
+			result = append(result, toLower(w))
+			continue
+		}
+
+		if isUpper(w) {
+			if src[i-1] == '_' {
+				result = append(result, toLower(w))
+				continue
+			}
+			result = append(result, '_', toLower(w))
+			continue
+		}
+
+		result = append(result, w)
+	}
+	return string(result)
+}
+
+func isUpper(w byte) bool {
+	return w >= 'A' && w <= 'Z'
+}
+
+func toLower(w byte) byte {
+	return w - 'A' + 'a'
+}

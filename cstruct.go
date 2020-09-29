@@ -30,7 +30,13 @@ const (
 
 type CStruct struct {
 	Name     string
-	FieldSet FieldSet `json:"field_set" bson:"field_set"`
+	FieldSet FieldSet
+}
+
+func (c *CStruct) FieldNameToLower() {
+	for i := range c.FieldSet {
+		c.FieldSet[i].Name = ToUnderLine(c.FieldSet[i].Name)
+	}
 }
 
 type FieldSet []Field

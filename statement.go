@@ -77,7 +77,7 @@ func (l *lexer) arrayStatement(dataType, nameToken Token, structure *CStruct, is
 			dType = Float32
 		case TFloat64:
 			dType = Float64
-		case TChar:
+		case TByte:
 			dType = Hex
 		}
 

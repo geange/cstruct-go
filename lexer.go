@@ -114,7 +114,7 @@ func (l *lexer) Statement() ([]Field, error) {
 		dType = Float32
 	case TFloat64:
 		dType = Float64
-	case TChar:
+	case TByte:
 		dType = Hex
 	}
 
@@ -150,7 +150,7 @@ func (l *lexer) Statement() ([]Field, error) {
 	}
 
 	switch dataTypeToken.Type() {
-	case TFloat64, TInt64, TInt32, TInt16, TInt8, TUint64, TUint32, TUint16, TUint8, TChar:
+	case TFloat64, TInt64, TInt32, TInt16, TInt8, TUint64, TUint32, TUint16, TUint8, TByte:
 		if tToken.Type() == TLeftBracket {
 			fs, err := l.arrayStatement(dataTypeToken, nameToken, nil, false)
 			if err != nil {

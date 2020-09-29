@@ -40,7 +40,7 @@ var nestedText = `typedef struct{
 
 typedef struct
 {
-    char  CustomData[16];
+    byte CustomData[16];
     UTC_t StartTime;
     UTC_t EndTime;
     u16 StartVoltage;

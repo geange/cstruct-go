@@ -2,7 +2,7 @@ package cstruct
 
 var (
 	ReserveWords = []string{
-		"auto", "break", "case", "char", "const", "continue",
+		"auto", "break", "case", "byte", "const", "continue",
 		"default", "do", "double", "else", "enum", "extern",
 		"float", "for", "goto", "if", "int", "long",
 		"s64", "s32", "s16", "s8",
@@ -43,6 +43,6 @@ var (
 		TInteger:       "integer",
 		TFloatingPoint: "floating_point",
 		TString:        "string",
-		TChar:          "char",
+		TByte:          "byte",
 	}
 )

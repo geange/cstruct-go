@@ -30,7 +30,7 @@ func TestLexer_AllStructure(t *testing.T) {
 	for _, item := range list {
 		fmt.Println(item.Name)
 		for _, v := range item.FieldSet {
-			fmt.Println(v)
+			fmt.Println(v.Name)
 		}
 	}
 }
