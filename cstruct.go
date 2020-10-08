@@ -19,7 +19,8 @@ const (
 	String = FieldType("string")
 	Hex    = FieldType("hex")
 	// 内部结构体
-	Struct = "struct"
+	Struct = FieldType("struct")
+	Array  = FieldType("array")
 
 	LEN0 = 0
 	LEN1 = 1

@@ -37,10 +37,30 @@ func NewLexer(reader io.Reader) (Lexer, error) {
 	}, nil
 }
 
+func NewLexerV1(reader io.Reader) (LexerV1, error) {
+	bs, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+
+	scanner := NewScanner(bs)
+	tokens, err := scanner.Scan()
+	if err != nil {
+		return nil, err
+	}
+
+	return &lexer{
+		tokens:    tokens,
+		index:     0,
+		structMap: make(map[string]CStructV1),
+	}, nil
+}
+
 type lexer struct {
 	tokens     []Token
 	index      int
 	structures map[string]CStruct
+	structMap  map[string]CStructV1
 }
 
 func (l *lexer) Fetch() (Token, error) {

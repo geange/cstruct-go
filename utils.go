@@ -1,5 +1,14 @@
 package cstruct
 
+var (
+	defaultFormat = "%s_%s"
+)
+
+func Format(format string) error {
+	defaultFormat = format
+	return nil
+}
+
 func IN(f string, fields ...string) bool {
 	for _, v := range fields {
 		if f == v {
