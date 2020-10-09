@@ -230,12 +230,9 @@ func (l *lexer) scanStatement() (StatementV1, error) {
 		case TString:
 			className := dtToken.Value().(string)
 			if item, ok := l.cache[className]; ok {
-				v := item
-				v.fName = name
-
-				fmt.Println("~~~~~~~~", v)
-
-				return &v, nil
+				v := item.Copy()
+				v.SetFieldName(name)
+				return v, nil
 			}
 			return nil, fmt.Errorf("struct %s not exist", className)
 		}
