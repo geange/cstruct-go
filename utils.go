@@ -43,6 +43,21 @@ func getFieldTypeSize(t FieldType) uint {
 	}
 }
 
+func fieldTypeSize(t FieldType) int {
+	switch t {
+	case UInt8, Int8, BYTE:
+		return LEN1
+	case UInt16, Int16:
+		return LEN2
+	case UInt32, Int32:
+		return LEN4
+	case UInt64, Int64:
+		return LEN8
+	default:
+		return LEN0
+	}
+}
+
 func ToUnderLine(src string) string {
 	result := make([]byte, 0)
 	for i := 0; i < len(src); i++ {

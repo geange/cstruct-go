@@ -50,9 +50,9 @@ func NewLexerV1(reader io.Reader) (LexerV1, error) {
 	}
 
 	return &lexer{
-		tokens:    tokens,
-		index:     0,
-		structMap: make(map[string]CStructV1),
+		tokens: tokens,
+		index:  0,
+		cache:  make(map[string]BaseStructV1),
 	}, nil
 }
 
@@ -60,7 +60,7 @@ type lexer struct {
 	tokens     []Token
 	index      int
 	structures map[string]CStruct
-	structMap  map[string]CStructV1
+	cache      map[string]BaseStructV1
 }
 
 func (l *lexer) Fetch() (Token, error) {

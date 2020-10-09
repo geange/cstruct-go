@@ -8,25 +8,25 @@ import (
 
 func main() {
 	buf := bytes.NewBufferString(nestedText)
-	lex, err := cstruct.NewLexerV1(buf)
+	lex, err := cstruct.NewLexerV2(buf)
 	if err != nil {
 		panic(err)
 	}
 
-	items, err := lex.AllStructureV1()
+	items, err := lex.AllStruct()
 	if err != nil {
 		panic(err)
 	}
 
 	for _, item := range items {
-		fmt.Println(item.FieldName)
+		fmt.Println("class name:", item.ClassName())
 
 		fields, err := item.Flat()
 		if err != nil {
 			panic(err)
 		}
 		for _, v := range fields {
-			fmt.Println(v.FieldName(), v.Type())
+			fmt.Println(v.Name(), v.Type())
 		}
 	}
 }
@@ -41,7 +41,7 @@ var (
 typedef struct
 {
     byte CustomData[16];
-    UTC_t StartTime;
+    UTC_t StartTime[2];
     UTC_t EndTime;
     u16 StartVoltage;
     u16 EndVoltage;

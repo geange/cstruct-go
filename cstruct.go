@@ -4,6 +4,7 @@ type FieldType string
 
 const (
 	// C语言中的数据类型
+	BYTE    = FieldType("byte")
 	UInt8   = FieldType("uint8")
 	UInt16  = FieldType("uint16")
 	UInt32  = FieldType("uint32")
