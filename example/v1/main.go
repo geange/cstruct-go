@@ -8,7 +8,7 @@ import (
 
 func main() {
 	buf := bytes.NewBufferString(nestedText)
-	lex, err := cstruct.NewLexerV2(buf)
+	lex, err := cstruct.NewLexerV1(buf)
 	if err != nil {
 		panic(err)
 	}
